@@ -46,7 +46,7 @@ public class EventList extends Fragment {
         recycler.setHasFixedSize(true);
         recycler.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        mAdapter = new FirebaseRecyclerAdapter<Event, EventHolder>(Event.class, R.layout.fragment_add_event, EventHolder.class, dbEvent) {
+        mAdapter = new FirebaseRecyclerAdapter<Event, EventHolder>(Event.class, R.layout.item_evento_layout, EventHolder.class, dbEvent) {
             @Override
             protected void populateViewHolder(EventHolder eventHolder, Event e, int position) {
                 eventHolder.setName("Name: " + e.getName());

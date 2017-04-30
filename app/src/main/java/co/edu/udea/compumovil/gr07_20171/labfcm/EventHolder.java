@@ -17,22 +17,22 @@ public class EventHolder extends RecyclerView.ViewHolder {
     }
 
     public void setName(String name) {
-        TextView field = (TextView) mView.findViewById(R.id.editTextEventName);
+        TextView field = (TextView) mView.findViewById(R.id.namelv);
         field.setText(name);
     }
 
     public void setDes(String des) {
-        TextView field = (TextView) mView.findViewById(R.id.editTextEventDescription);
+        TextView field = (TextView) mView.findViewById(R.id.desclv);
         field.setText(des);
     }
 
     public void setDate(String date) {
-        TextView field = (TextView) mView.findViewById(R.id.editTextEventName);
+        TextView field = (TextView) mView.findViewById(R.id.datelv);
         field.setText(date);
     }
 
     public void setMail(String mail) {
-        TextView field = (TextView) mView.findViewById(R.id.editTextEventName);
+        TextView field = (TextView) mView.findViewById(R.id.userMaillv);
         field.setText(mail);
     }
 }
