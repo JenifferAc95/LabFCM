@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.auth.api.Auth;
@@ -36,8 +37,10 @@ public class EventList extends Fragment implements GoogleApiClient.OnConnectionF
 
     private static final String TAGLOG = "firebase-db";
 
-    private RecyclerView recyclerEvents;
-    FirebaseRecyclerAdapter mAdapter;
+    //private RecyclerView recyclerEvents;
+    //FirebaseRecyclerAdapter mAdapter;
+
+    ListView lvEvents;
 
     ArrayList<Event> eventList;
 
@@ -64,9 +67,14 @@ public class EventList extends Fragment implements GoogleApiClient.OnConnectionF
 
 
         final View view = inflater.inflate(R.layout.fragment_event_list, container,false);
+        lvEvents = (ListView) view.findViewById(R.id.LvEvents);
+
+
+        /*
         recyclerEvents = (RecyclerView) view.findViewById(R.id.lstEventos);
         recyclerEvents.setHasFixedSize(true);
         recyclerEvents.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        */
 
 
         //
@@ -114,8 +122,8 @@ public class EventList extends Fragment implements GoogleApiClient.OnConnectionF
         });
 
 
-
-        recyclerEvents.setAdapter(mAdapter);
+        lvEvents.setAdapter(new EventListAdapter( view.getContext() , eventList));
+        //recyclerEvents.setAdapter(mAdapter);
 
 
         return view;
@@ -124,7 +132,7 @@ public class EventList extends Fragment implements GoogleApiClient.OnConnectionF
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mAdapter.cleanup();
+        //mAdapter.cleanup();
     }
 
     private void setUserData(FirebaseUser user) {
