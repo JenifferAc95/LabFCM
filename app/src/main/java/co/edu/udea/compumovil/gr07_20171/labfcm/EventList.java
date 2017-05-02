@@ -43,18 +43,8 @@ public class EventList extends Fragment implements GoogleApiClient.OnConnectionF
     private RecyclerView recyclerEvents;
     FirebaseRecyclerAdapter mAdapter;
 
-    ListView lvEvents;
     List<Event> list = new ArrayList<Event>();
     ArrayList<Event> eventList = new ArrayList<Event>(list);
-
-    // captura de infor Usuario logueado con google
-    private String userEmail;
-    private GoogleApiClient googleApiClient;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener firebaseAuthListener;
-
-
-
 
     public EventList() {
         // Required empty public constructor
@@ -68,17 +58,14 @@ public class EventList extends Fragment implements GoogleApiClient.OnConnectionF
                 FirebaseDatabase.getInstance().getReference()
                         .child("dblab4").child("eventos");
 
-
         final View view = inflater.inflate(R.layout.fragment_event_list, container,false);
-        //lvEvents = (ListView) view.findViewById(R.id.LvEvents);
-
-
 
         recyclerEvents = (RecyclerView) view.findViewById(R.id.lstEventos);
         recyclerEvents.setHasFixedSize(true);
         recyclerEvents.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         mAdapter = new FirebaseRecyclerAdapter<Event, EventHolder>(Event.class, R.layout.item_evento_layout, EventHolder.class, dbEvent) {
+
             @Override
             protected void populateViewHolder(EventHolder eventHolder, final Event e, final int position) {
                 eventHolder.setName("Name: " + e.getName());
@@ -86,72 +73,21 @@ public class EventList extends Fragment implements GoogleApiClient.OnConnectionF
                 eventHolder.setDate("Date: " + e.getDate());
                 eventHolder.setMail("Email: " + "jeniffer.acostao@gmail.com");
 
-                eventHolder.getmView().setOnClickListener(new View.OnClickListener(){
+                eventHolder.getmView().setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View v) {
-
+                        Log.d("REGISTRO -->", "EventList ------------>  Clic en el evento " +e.toString());
                         Intent intent = new Intent(getContext(), EventDetail.class);
-                        intent.putExtra("event",(Serializable)e);
+                        intent.putExtra("event", (Serializable) e);
                         v.getContext().startActivity(intent);
-                        Log.d("REGISTRO -->","ITEM "+position+" CLIQUEADO");
-
                     }
                 });
+
             }
         };
 
-
-        // prueba de obtener Email
-        /*
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        googleApiClient = new GoogleApiClient.Builder(view.getContext())
-                .enableAutoManage(getActivity(), this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    //esta logueado con google
-                    setUserData(user);
-                } else {
-                    // no esta logueado con google
-                }
-            }
-        };
-        */
-
-        //
-        /*
-        dbEvent.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot eventSnapshot : snapshot.getChildren()) {
-                    //Getting the data from snapshot
-                    Event event = eventSnapshot.getValue(Event.class);
-                    eventList.add(event);
-                    Log.d("Lista de Eventos","------------------> prueba consumo eventos : "+ event.toString());
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-            }
-        }); */
-
-
-         //lvEvents.setAdapter(new EventListAdapter( view.getContext() , eventList));
         recyclerEvents.setAdapter(mAdapter);
-
-
         return view;
     }
 
@@ -159,14 +95,6 @@ public class EventList extends Fragment implements GoogleApiClient.OnConnectionF
     public void onDestroy() {
         super.onDestroy();
         //mAdapter.cleanup();
-    }
-
-    private void setUserData(FirebaseUser user) {
-        //nameTextView.setText(user.getDisplayName());
-        userEmail = user.getEmail();
-        Log.d("EventList :    ", "------------> setUserData: el email ingresado es "+userEmail);
-        //idTextView.setText(user.getUid());
-        //Glide.with(this).load(user.getPhotoUrl()).into(photoImageView);
     }
 
     @Override
