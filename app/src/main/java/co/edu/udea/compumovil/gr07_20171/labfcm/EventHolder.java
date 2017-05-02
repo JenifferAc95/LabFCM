@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 /**
- * Created by Jeniffer Acosta on 29/04/2017.
+ * Created by Santiago on 29/04/2017.
  */
 
 public class EventHolder extends RecyclerView.ViewHolder {
@@ -35,4 +35,5 @@ public class EventHolder extends RecyclerView.ViewHolder {
         TextView field = (TextView) mView.findViewById(R.id.userMaillv);
         field.setText(mail);
     }
+
 }

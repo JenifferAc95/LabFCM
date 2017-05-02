@@ -19,7 +19,8 @@
         <activity
             android:name=".NavDrawe"
             android:label="@string/title_activity_nav_drawe"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".EventDetail"></activity>
     </application>
 
 </manifest>
