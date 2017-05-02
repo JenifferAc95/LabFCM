@@ -36,4 +36,7 @@ public class EventHolder extends RecyclerView.ViewHolder {
         field.setText(mail);
     }
 
+    public View getmView() {
+        return mView;
+    }
 }

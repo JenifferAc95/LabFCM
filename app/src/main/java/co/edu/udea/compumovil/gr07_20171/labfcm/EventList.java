@@ -1,6 +1,7 @@
 package co.edu.udea.compumovil.gr07_20171.labfcm;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -25,7 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import co.edu.udea.compumovil.gr07_20171.labfcm.data.Event;
 
@@ -37,12 +40,12 @@ public class EventList extends Fragment implements GoogleApiClient.OnConnectionF
 
     private static final String TAGLOG = "firebase-db";
 
-    //private RecyclerView recyclerEvents;
-    //FirebaseRecyclerAdapter mAdapter;
+    private RecyclerView recyclerEvents;
+    FirebaseRecyclerAdapter mAdapter;
 
     ListView lvEvents;
-
-    ArrayList<Event> eventList;
+    List<Event> list = new ArrayList<Event>();
+    ArrayList<Event> eventList = new ArrayList<Event>(list);
 
     // captura de infor Usuario logueado con google
     private String userEmail;
@@ -63,21 +66,43 @@ public class EventList extends Fragment implements GoogleApiClient.OnConnectionF
 
         DatabaseReference dbEvent =
                 FirebaseDatabase.getInstance().getReference()
-                        .child("dblab4/eventos");
+                        .child("dblab4").child("eventos");
 
 
         final View view = inflater.inflate(R.layout.fragment_event_list, container,false);
-        lvEvents = (ListView) view.findViewById(R.id.LvEvents);
+        //lvEvents = (ListView) view.findViewById(R.id.LvEvents);
 
 
-        /*
+
         recyclerEvents = (RecyclerView) view.findViewById(R.id.lstEventos);
         recyclerEvents.setHasFixedSize(true);
         recyclerEvents.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        */
+
+        mAdapter = new FirebaseRecyclerAdapter<Event, EventHolder>(Event.class, R.layout.item_evento_layout, EventHolder.class, dbEvent) {
+            @Override
+            protected void populateViewHolder(EventHolder eventHolder, final Event e, final int position) {
+                eventHolder.setName("Name: " + e.getName());
+                eventHolder.setDes("Descripción: " + e.getFirstDescription());
+                eventHolder.setDate("Date: " + e.getDate());
+                eventHolder.setMail("Email: " + "jeniffer.acostao@gmail.com");
+
+                eventHolder.getmView().setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(getContext(), EventDetail.class);
+                        intent.putExtra("event",(Serializable)e);
+                        v.getContext().startActivity(intent);
+                        Log.d("REGISTRO -->","ITEM "+position+" CLIQUEADO");
+
+                    }
+                });
+            }
+        };
 
 
-        //
+        // prueba de obtener Email
+        /*
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -100,9 +125,10 @@ public class EventList extends Fragment implements GoogleApiClient.OnConnectionF
                 }
             }
         };
-        //
+        */
 
-        //Value event listener for realtime data update
+        //
+        /*
         dbEvent.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -119,11 +145,11 @@ public class EventList extends Fragment implements GoogleApiClient.OnConnectionF
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
             }
-        });
+        }); */
 
 
-        lvEvents.setAdapter(new EventListAdapter( view.getContext() , eventList));
-        //recyclerEvents.setAdapter(mAdapter);
+         //lvEvents.setAdapter(new EventListAdapter( view.getContext() , eventList));
+        recyclerEvents.setAdapter(mAdapter);
 
 
         return view;
