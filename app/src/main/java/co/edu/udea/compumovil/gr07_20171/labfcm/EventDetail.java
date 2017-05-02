@@ -16,8 +16,6 @@ public class EventDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
-
-
     }
 
     @Override
@@ -32,9 +30,5 @@ public class EventDetail extends AppCompatActivity {
             tvEvento.setText(event.toString());
 
         }
-
-
-}
-
-
+    }
 }
