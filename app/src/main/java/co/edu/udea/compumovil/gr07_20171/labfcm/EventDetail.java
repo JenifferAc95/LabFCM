@@ -10,7 +10,12 @@ import co.edu.udea.compumovil.gr07_20171.labfcm.data.Event;
 public class EventDetail extends AppCompatActivity {
 
     Event event;
-    TextView tvEvento;
+    TextView tvName;
+    TextView tvDescr;
+    TextView tvDate;
+    TextView tvEmail;
+    TextView tvPlace;
+    TextView tvOtherInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +30,20 @@ public class EventDetail extends AppCompatActivity {
         Intent startingIntent = getIntent();
         if (startingIntent != null) {
             //recibimos el evento enviado
-             event = (Event) getIntent().getSerializableExtra("event");
-            tvEvento =(TextView) findViewById(R.id.TvEvento);
-            tvEvento.setText(event.toString());
+            event = (Event) getIntent().getSerializableExtra("event");
+            tvName =(TextView) findViewById(R.id.event_name_tv);
+            tvName.setText(event.getName().toString());
+            tvDescr =(TextView) findViewById(R.id.event_description_tv);
+            tvDescr.setText(event.getFirstDescription().toString());
+            tvDate =(TextView) findViewById(R.id.date_tv);
+            tvDate.setText(event.getDate().toString());
+            tvEmail =(TextView) findViewById(R.id.email_tv);
+            tvEmail.setText(event.getName().toString());
+            tvPlace =(TextView) findViewById(R.id.place_tv);
+            tvPlace.setText(event.getPlace().toString());
+            tvOtherInfo = (TextView) findViewById(R.id.otherinfo_tv);
+            tvOtherInfo.setText(event.getInformation().toString());
+
 
         }
     }

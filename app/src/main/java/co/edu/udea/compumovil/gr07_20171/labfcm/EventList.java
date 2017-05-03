@@ -14,17 +14,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -89,6 +84,7 @@ public class EventList extends Fragment implements GoogleApiClient.OnConnectionF
                 eventHolder.getmView().setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
+                        Log.d("REGISTRO -->","Se ha dado clic en el evento"+e.toString()+ "esta en la pos:" + position);
 
                         Intent intent = new Intent(getContext(), EventDetail.class);
                         intent.putExtra("event",(Serializable)e);

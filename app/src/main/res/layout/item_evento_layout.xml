@@ -2,69 +2,78 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="1dp">
 
-
-    <!--<android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cv">-->
+        android:layout_height="wrap_content">
 
-
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:id="@+id/cv"
+            app:cardUseCompatPadding="true">
 
-            <ImageView
-                android:id="@+id/picturelv"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="top|left"
-                android:layout_weight="3"
-                android:src="@drawable/calendar"/>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="5"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/namelv"
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/picturelv"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="top|left"
+                    android:layout_weight="3"
+                    android:src="@drawable/calendar"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/desclv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10dp" />
+                    <TextView
+                        android:id="@+id/namelv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp" />
 
-                <TextView
-                    android:id="@+id/datelv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10dp" />
+                    <TextView
+                        android:id="@+id/desclv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10dp" />
 
-                <TextView
-                    android:id="@+id/userMaillv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10dp" />
+                    <TextView
+                        android:id="@+id/datelv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10dp" />
 
-                <RatingBar
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="80dp"
-                    android:layout_height="match_parent"
-                    android:numStars="5"
-                    android:rating="4" />
+                    <TextView
+                        android:id="@+id/userMaillv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10dp" />
+
+                    <RatingBar
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:numStars="5"
+                        android:rating="4" />
+                </LinearLayout>
+
             </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-        </LinearLayout>
-    <!--</android.support.v7.widget.CardView>-->
+    </LinearLayout>
+
 
 
 </LinearLayout>

@@ -1,10 +1,12 @@
 package co.edu.udea.compumovil.gr07_20171.labfcm.data;
 
+import java.io.Serializable;
+
 /**
  * Created by Jeniffer Acosta on 25/04/2017.
  */
 
-public class Event {
+public class Event  implements Serializable{
     private String name;
     private String firstDescription;
     private String information;
