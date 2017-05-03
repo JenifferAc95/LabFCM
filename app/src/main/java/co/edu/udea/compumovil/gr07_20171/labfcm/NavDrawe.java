@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
@@ -48,9 +49,9 @@ public class NavDrawe extends AppCompatActivity
     private FirebaseUser mFirebaseUser;
     private static final String TAG = "NavDraw";
 
-    // variables de prueba
-    private ImageView imageView;
-    private TextView textViewName;
+    ImageView imageViewnavhead;
+    TextView tvNamenavhead;
+    TextView tvEmailavhead;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,10 @@ public class NavDrawe extends AppCompatActivity
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         profile = new Profile();
+
+        imageViewnavhead = (ImageView) findViewById(R.id.imageViewnavhead);
+        tvNamenavhead = (TextView) findViewById(R.id.tvNamenavhead);
+        tvEmailavhead = (TextView) findViewById(R.id.tvEmailavhead);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -96,6 +101,9 @@ public class NavDrawe extends AppCompatActivity
                 Log.d(TAG, "Username, email " + mUsername + mEmail);
 
             }
+            Glide.with(this).load(getPhotoUrl()).into(imageViewnavhead);
+            tvNamenavhead.setText(getUsername());
+            tvEmailavhead.setText(getEmail());
         }
 
 
