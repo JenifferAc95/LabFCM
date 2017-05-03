@@ -44,6 +44,7 @@ public class NavDrawe extends AppCompatActivity
     private FirebaseUser mFirebaseUser;
     private static final String TAG = "NavDraw";
 
+    // variables de prueba
     private ImageView imageView;
     private TextView textViewName;
 
