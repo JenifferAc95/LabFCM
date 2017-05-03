@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -41,6 +42,7 @@ public class NavDrawe extends AppCompatActivity
     private static final String TAG = "NavDraw";
     private ImageView imageView;
     private TextView textViewName;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,13 @@ public class NavDrawe extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });*/
+
+        /*mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API)
+                .addApi(AppInvite.API)
+                .build();*/
+
         if (mFirebaseUser == null) {
             // Not signed in, launch the Sign In activity
             startActivity(new Intent(this, Login.class));
@@ -69,8 +78,6 @@ public class NavDrawe extends AppCompatActivity
         } else {
             mUsername = mFirebaseUser.getDisplayName();
             if (mFirebaseUser.getPhotoUrl() != null) {
-                /*textViewName = (TextView) findViewById(R.id.namenavhead);
-                textViewName.setText(mUsername);*/
                 mEmail = mFirebaseUser.getEmail().toString();
                 mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
                 Log.d(TAG, "Username, email " + mUsername + mEmail);
@@ -154,6 +161,7 @@ public class NavDrawe extends AppCompatActivity
             return true;
         } else if (id == R.id.logout) {
             mFirebaseAuth.signOut();
+            //Auth.GoogleSignInApi.signOut(mGoogleApiClient);
             mUsername = ANONYMOUS;
             startActivity(new Intent(this, Login.class));
             return true;
