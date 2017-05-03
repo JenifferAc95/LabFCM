@@ -90,4 +90,9 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="EditarPerfil">Editar Perfil</string>
+    <string name="actualizarinfo">Actualizar información del perfil</string>
+    <string name="sesion">Matener la sesión iniciada despues de cerrar la aplicación.</string>
+    <string name="MantenerSesion">Mantener sesión</string>
+    <string name="otras">Otras configuraciones</string>
 </resources>
