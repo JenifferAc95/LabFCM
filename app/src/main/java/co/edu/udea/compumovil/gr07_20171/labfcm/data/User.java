@@ -5,7 +5,6 @@ package co.edu.udea.compumovil.gr07_20171.labfcm.data;
  */
 
 public class User {
-    private String id;
     private String nickName;
     private String mail;
     private String password;
@@ -15,21 +14,12 @@ public class User {
     public User() {
     }
 
-    public User(String id, String nickName, String mail, String password, String age, String picture) {
-        this.id = id;
+    public User(String nickName, String mail, String password, String age, String picture) {
         this.nickName = nickName;
         this.mail = mail;
         this.password = password;
         this.age = age;
         this.picture = picture;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getNickName() {

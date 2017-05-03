@@ -32,8 +32,10 @@ public class NavDrawe extends AppCompatActivity
     preferencesActivity preferences = new preferencesActivity();
     Fragment about = new About();
     AddEvent add = new AddEvent();
-    FloatingActionButton fab;
     Fragment events = new EventList();
+    Fragment profile;
+
+    FloatingActionButton fab;
     FragmentTransaction manager = getSupportFragmentManager().beginTransaction();
     private boolean controlSelect = false;
     private GoogleApiClient googleApiClient;
@@ -56,6 +58,7 @@ public class NavDrawe extends AppCompatActivity
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        profile = new Profile();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -155,6 +158,7 @@ public class NavDrawe extends AppCompatActivity
 
         if (id == R.id.profile) {
             // Handle the camera action
+            manager.replace(R.id.fragment_container, profile);
 
         } else if (id == R.id.events) {
             //events = new EventList();
