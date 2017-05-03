@@ -2,6 +2,7 @@ package co.edu.udea.compumovil.gr07_20171.labfcm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -18,12 +19,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class NavDrawe extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
 
     preferencesActivity preferences = new preferencesActivity();
     Fragment about = new About();
@@ -32,7 +36,7 @@ public class NavDrawe extends AppCompatActivity
     Fragment events = new EventList();
     FragmentTransaction manager = getSupportFragmentManager().beginTransaction();
     private boolean controlSelect = false;
-
+    private GoogleApiClient googleApiClient;
     private FirebaseAuth mFirebaseAuth;
     private String mUsername;
     private String mPhotoUrl;
@@ -64,6 +68,16 @@ public class NavDrawe extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });*/
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
 
         if (mFirebaseUser == null) {
             // Not signed in, launch the Sign In activity
@@ -156,7 +170,7 @@ public class NavDrawe extends AppCompatActivity
             return true;
         } else if (id == R.id.logout) {
             mFirebaseAuth.signOut();
-            //Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+            Auth.GoogleSignInApi.signOut(googleApiClient);
             mUsername = ANONYMOUS;
             startActivity(new Intent(this, Login.class));
             return true;
@@ -208,5 +222,10 @@ public class NavDrawe extends AppCompatActivity
 
     public String getEmail() {
         return mEmail;
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }
