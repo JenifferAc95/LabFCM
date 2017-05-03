@@ -28,8 +28,9 @@ public class NavDrawe extends AppCompatActivity
     preferencesActivity preferences = new preferencesActivity();
     Fragment about = new About();
     AddEvent add = new AddEvent();
-    FloatingActionButton fab;
     Fragment events = new EventList();
+
+    FloatingActionButton fab;
     FragmentTransaction manager = getSupportFragmentManager().beginTransaction();
     private boolean controlSelect = false;
 
