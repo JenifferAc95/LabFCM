@@ -57,12 +57,15 @@ public class AddEvent extends Fragment implements GoogleApiClient.OnConnectionFa
     Button btnR;
     EditText[] txtValidateR = new EditText[4];
     View view;
+    NavDrawe nwParent;
 
     // captura de infor Usuario logueado con google
+    /*
     private String userEmail;
     private GoogleApiClient googleApiClient;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
+    */
 
     public AddEvent() {
         // Required empty public constructor
@@ -72,6 +75,8 @@ public class AddEvent extends Fragment implements GoogleApiClient.OnConnectionFa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_add_event,container,false);
+
+        nwParent = (NavDrawe) getActivity();
 
         pict = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.calendar);
         targetImageR = (ImageView)view.findViewById(R.id.eventImage);
@@ -105,8 +110,9 @@ public class AddEvent extends Fragment implements GoogleApiClient.OnConnectionFa
             txtValidateR[n].addTextChangedListener(btnActivation);
         }
 
+
         // prueba de obtener Email
-        //
+        /*
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -130,7 +136,7 @@ public class AddEvent extends Fragment implements GoogleApiClient.OnConnectionFa
                 }
             }
         };
-        ///
+        */
 
         return view;
     }
@@ -203,7 +209,7 @@ public class AddEvent extends Fragment implements GoogleApiClient.OnConnectionFa
         String user = "userTemp";
         String fotoRef = "getBitmapAsByteArray(pict)";
 
-        Log.d("REGISTRO -->","CLASE: AddEvent,Metodo onClickEvent el usuario que crea el evento es  "+userEmail);
+        Log.d("REGISTRO -->","CLASE: AddEvent,Metodo onClickEvent el usuario que crea el evento es "+ nwParent.getEmail());
 
         Event event = new Event(name, firstDescription, information, place, date, user, fotoRef);
 
@@ -235,6 +241,7 @@ public class AddEvent extends Fragment implements GoogleApiClient.OnConnectionFa
     }
 
     // para capturar User
+    /*
     private void setUserData(FirebaseUser user) {
         //nameTextView.setText(user.getDisplayName());
         userEmail = user.getEmail();
@@ -242,6 +249,7 @@ public class AddEvent extends Fragment implements GoogleApiClient.OnConnectionFa
         //idTextView.setText(user.getUid());
         //Glide.with(this).load(user.getPhotoUrl()).into(photoImageView);
     }
+    */
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {

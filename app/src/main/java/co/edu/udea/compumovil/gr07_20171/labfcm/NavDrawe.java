@@ -34,15 +34,16 @@ public class NavDrawe extends AppCompatActivity
     private boolean controlSelect = false;
 
     private FirebaseAuth mFirebaseAuth;
-    String mUsername;
+    private String mUsername;
     private String mPhotoUrl;
     private String mEmail;
+
     public static final String ANONYMOUS = "anonymous";
     private FirebaseUser mFirebaseUser;
     private static final String TAG = "NavDraw";
+
     private ImageView imageView;
     private TextView textViewName;
-    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +64,6 @@ public class NavDrawe extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });*/
-
-        /*mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API)
-                .addApi(AppInvite.API)
-                .build();*/
 
         if (mFirebaseUser == null) {
             // Not signed in, launch the Sign In activity
@@ -134,7 +129,6 @@ public class NavDrawe extends AppCompatActivity
             startActivity(new Intent(this, Login.class));
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -147,12 +141,13 @@ public class NavDrawe extends AppCompatActivity
 
         if (id == R.id.profile) {
             // Handle the camera action
+
         } else if (id == R.id.events) {
-            events = new EventList();
+            //events = new EventList();
             manager.replace(R.id.fragment_container, events);
             fab.setVisibility(View.VISIBLE);
         } else if (id == R.id.about) {
-            about = new About();
+            //about = new About();
             manager.replace(R.id.fragment_container, about);
             fab.setVisibility(View.INVISIBLE);
         } else if (id == R.id.settingsNav) {
@@ -184,7 +179,7 @@ public class NavDrawe extends AppCompatActivity
 
     public void AddEvent(View v){
         manager = getSupportFragmentManager().beginTransaction();
-        add = new AddEvent();
+        //add = new AddEvent();
         manager.replace(R.id.fragment_container, add);
         manager.commit();
         fab.setVisibility(View.INVISIBLE);
@@ -197,5 +192,21 @@ public class NavDrawe extends AppCompatActivity
         manager.replace(R.id.fragment_container, events);
         manager.commit();
         fab.setVisibility(View.VISIBLE);
+    }
+
+    public preferencesActivity getPreferences() {
+        return preferences;
+    }
+
+    public String getUsername() {
+        return mUsername;
+    }
+
+    public String getPhotoUrl() {
+        return mPhotoUrl;
+    }
+
+    public String getEmail() {
+        return mEmail;
     }
 }
